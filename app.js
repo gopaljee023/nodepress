@@ -1,4 +1,6 @@
 var express = require('express')
+var chalk = require('chalk')
+var debug = require('debug')('app')
 
 var app = express();
 
@@ -7,5 +9,6 @@ app.get('/',(req,res)=>{
 });
 
 app.listen(3000, ()=>{
-    console.log('listening on port 3000');
-})
+    //debug.log(`listening on port ${chalk.green('3000')}`); //it is working
+    debug(`listening on port ${chalk.green('3000')}`);
+});
