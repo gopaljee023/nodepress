@@ -5,7 +5,7 @@ var morgan = require('morgan');
 
 var app = express();
 
-app.use(morgan("combined"))
+app.use(morgan("tiny"))
 
 app.get('/',(req,res)=>{
     res.send('Hello Gopal');
