@@ -9,15 +9,20 @@ var app = express();
 
 app.use(morgan("tiny"))
 
-console.log(path.join(__dirname,"public"))
-app.use(express.static(path.join(__dirname,"public")));
+
+app.use('/css',express.static(path.join(__dirname,"/node_modules/bootstrap/dist/css")));
+app.use('/js',express.static(path.join(__dirname,"/node_modules/bootstrap/dist/js/")));
+app.use('/js',express.static(path.join(__dirname,"/node_modules/jquery/dist/")));
+
+app.use(express.static(path.join(__dirname,"/public/")));
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,"views","index.html"));
+    res.sendFile(path.join(__dirname,"/views/","/index.html"));
 });
 
 app.listen(3000, ()=>{
     //debug.log(`listening on port ${chalk.green('3000')}`); //it is working
     debug(`listening on port ${chalk.green('3000')}`);
 });
+
 
