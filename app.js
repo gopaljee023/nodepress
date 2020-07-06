@@ -9,6 +9,9 @@ var app = express();
 
 app.use(morgan("tiny"))
 
+console.log(path.join(__dirname,"public"))
+app.use(express.static(path.join(__dirname,"public")));
+
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,"views","index.html"));
 });
