@@ -10,7 +10,6 @@ var app = express();
 app.use(morgan("tiny"))
 
 app.get('/',(req,res)=>{
-   // res.send('Hello Gopal');
     res.sendFile(path.join(__dirname,"views","index.html"));
 });
 
@@ -19,4 +18,3 @@ app.listen(3000, ()=>{
     debug(`listening on port ${chalk.green('3000')}`);
 });
 
-console.log(path.parse('C:\\path\\dir\\file.txt'));
