@@ -25,6 +25,10 @@
   "nodemonConfig":{
     "restartable":"rs",
     "ignore": ["node_modules/**/node_modules","test/*", "docs/*"],
-    "delay": "2500" 
+    "delay": "2500",
+    "env":{
+      "NODE_ENVIRONMENT":"development",
+       "PORT":4000
+     }  
   }
 }
