@@ -23,7 +23,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">Home</a>
+       <div class="row">
+        <div class="col"><a href="/" class="navbar-brand">Home</a> </div>
+        <% for(let i=0;i<nav.length;i++) {%>
+          <div class="col"><a href="<%= nav[i].link %>" class="navbar-brand"><%= nav[i].title %></a> </div> 
+        <%}%>
+      </div>
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
