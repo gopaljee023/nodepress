@@ -18,6 +18,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', './src/view');
 app.set('view engine', 'ejs');
 
+//registering the booksRouter for "/books/*"
+app.use('/books', require('./routes/booksRouter'));
+
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'Libaray',
