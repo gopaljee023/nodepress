@@ -1,6 +1,7 @@
 const express = require('express');
 const mssql = require('mssql');
 const debug = require('debug')('app:booksRouter');
+const url = require('url');
 
 const router = express.Router(); //capital R
 
@@ -61,7 +62,7 @@ const books = [
 
 router.route('/')
   .get((req, res) => {
-    const mssql = require('mssql');
+
     const request = new mssql.Request(); // see the new keyword
 
     request.query('SELECT * FROM books')
@@ -74,6 +75,36 @@ router.route('/')
           books: result.recordset,
         });
       }).catch((err) => debug(err));
+  });
+
+router
+  .route('/addbook/create')
+  .get((req, res) => {
+    res.render('addBooks', {
+      title: 'Add Books',
+      nav,
+    });
+  });
+
+router
+  .route('/addbook/submit')
+  .post((req, res) => {
+    console.log(req.body);
+    const { name, author, genre } = req.body;
+    const request = new mssql.Request();
+
+    (async function insertBook() {
+      try {
+        debug(`insert into books (id,title,author) values (9, ${name},${author})`);
+        await request.query(`insert into books (id,title,author) values (9, '${name}','${author}')`);
+        console.log('inserted');
+      } catch (err) {
+        debug(err);
+      }
+    }());
+
+    // debug(req.body);
+    res.send("recevied");
   });
 
 router

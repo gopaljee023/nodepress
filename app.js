@@ -4,6 +4,8 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 const mssql = require('mssql');
+const bodyParser = require('body-parser');
+const multer = require('multer');
 
 const port = process.env.PORT || 3000;
 
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.set('views', './src/view');
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 //registering the booksRouter for "/books/*"
 app.use('/books', require('./routes/booksRouter'));
