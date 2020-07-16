@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG=app:* nodemon app.js",
+    "start": "DEBUG=app,app:* nodemon app.js",
     "lint": "eslint app.js"
   },
   "keywords": [],
@@ -38,7 +38,7 @@
     "delay": "2500",
     "env": {
       "NODE_ENVIRONMENT": "development",
-      "PORT": 4000
+      "PORT": 3000
     }
   }
 }
