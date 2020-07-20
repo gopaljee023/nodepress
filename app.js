@@ -3,18 +3,8 @@ const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
-const mssql = require('mssql');
 
 const port = process.env.PORT || 3000;
-
-const config = {
-  user: 'gopal',
-  password: 'sunflower@123',
-  server: 'gjeenode.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
-  database: 'libarary',
-};
-
-mssql.connect(config).catch((err) => debug(err));
 
 const app = express();
 
@@ -30,6 +20,8 @@ app.set('view engine', 'ejs');
 
 //registering the booksRouter for "/books/*"
 app.use('/books', require('./routes/booksRouter'));
+const adminRouter = require('./routes/adminRouter')();
+app.use('/admin', adminRouter);
 
 app.get('/', (req, res) => {
   res.render('index', {

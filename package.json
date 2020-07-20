@@ -19,6 +19,7 @@
     "eslint": "7.4.0",
     "express": "4.17.1",
     "jquery": "3.5.1",
+    "mongodb": "3.5.9",
     "morgan": "1.10.0",
     "mssql": "6.2.0"
   },
@@ -36,7 +37,7 @@
     "delay": "2500",
     "env": {
       "NODE_ENVIRONMENT": "development",
-      "PORT": 4000
+      "PORT": 3000
     }
   }
 }

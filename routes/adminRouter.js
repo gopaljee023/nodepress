@@ -1,13 +1,9 @@
 const express = require('express');
+const { MongoClient } = require('mongodb');
 
-const debug = require('debug')('app:booksRouter');
+const debug = require('debug')('app:adminRouter');
 
-const router = express.Router(); //capital R
-
-const nav = [
-  { title: 'Books', link: '/books' },
-  { title: 'Authors', link: '/authors' },
-];
+const adminRouter = express.Router(); //capital R
 
 const books = [
   {
@@ -59,27 +55,34 @@ const books = [
     read: false,
   }];
 
-router.route('/')
-  .get((req, res) => {
+function router() {
+  adminRouter.route('/')
+    .get((req, res) => {
+      const url = 'mongodb://localhost:27017';
+      const dbName = 'LibaryApp';
+      (async function mongo() {
+        let client;
+        try {
+          client = await MongoClient.connect(url); //connect to mongoserver
+          const db = client.db(dbName); //pull a database
+          debug('Conneceted');
 
-    res.render('booksList', {
-      title: 'Libaray',
-      nav,
-      books,
+         const response = await db.collection('books').insertMany(books);
+         debug(response);
+         res.json(response); //send json body to client
+        }
+        catch (err) {
+          debug(err.stack);
+        }
+        finally{
+          client.db('books').dropDatabase();
+          client.close();
+          clein
+        }
+        res.send(' Hello from adminaa');
+      }());
+
     });
-  });
-
-router
-  .route('/:id')
-  .get((req, res) => {
-   const { id } = req.params;
-    debug("id is " + id);
-    debug("book title " + books[id].title);
-    res.render('bookView', {
-      title: 'Libaray',
-      nav,
-      book: books[id],
-    });
-  });
-
+  return adminRouter;
+}
 module.exports = router;
