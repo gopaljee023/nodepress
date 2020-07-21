@@ -20,8 +20,12 @@ app.set('view engine', 'ejs');
 
 //registering the booksRouter for "/books/*"
 app.use('/books', require('./routes/booksRouter'));
+
 const adminRouter = require('./routes/adminRouter')();
 app.use('/admin', adminRouter);
+
+const authRouter = require('./routes/authRouter')();
+app.use('/auth', authRouter);
 
 app.get('/', (req, res) => {
   res.render('index', {
